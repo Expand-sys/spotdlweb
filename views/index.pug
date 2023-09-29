@@ -5,24 +5,36 @@ block content
   .container
     h1 SO YE WANT TO PIRATE SOM MUSIC???
     .card.shadow-lg
-      form(action='/add_movie', method='POST')
+      form(action='submit', id="form")
         p
           | URL: 
-          input(type='text', name='URL', value='')
-          | Spotify username: 
-          input(type='text', name='USR', value='')
-          | Spotify Password: 
-          input(type='text', name='PASS', value='')
-        p 
-          | 
+          input(class="form" type='text', name='URL', value='')
+        p Type
+        select(name="option" class="form")
+          option(value="Single") Single
+          option(value="Playlist") Playlist
+        br
 
-        input#html(type='radio' name='fav_language' value='HTML')
-        label(for='html') HTML
         br
-        input#css(type='radio' name='fav_language' value='CSS')
-        label(for='css') CSS
-        br
-        input#javascript(type='radio' name='fav_language' value='JavaScript')
-        label(for='javascript') JavaScript
-        br
-        input(type='submit', value='Submit')
+        input#testButton(type='submit', value='Submit')
+      script(src="https://code.jquery.com/jquery-3.7.1.min.js")
+      script(src='socket.io/socket.io.js')
+      script(type='module').
+        let socket = io.connect();
+        socket.on("connect", function(data) {
+          const form = document.getElementById('form');
+          const elements = document.getElementsByClassName("form");
+          let array = [];
+          let obj = {}
+          for(var i = 0; i < elements.length; i++) {
+            obj[elements[i].name] = elements[i].value;
+          }
+
+          console.log(elements)
+          $('#testButton').click(function(event) {
+            event.preventDefault();
+            socket.emit('submit', obj);
+          });
+        })
+        
+    
