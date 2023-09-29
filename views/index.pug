@@ -1,0 +1,28 @@
+extends layout
+
+
+block content
+  .container
+    h1 SO YE WANT TO PIRATE SOM MUSIC???
+    .card.shadow-lg
+      form(action='/add_movie', method='POST')
+        p
+          | URL: 
+          input(type='text', name='URL', value='')
+          | Spotify username: 
+          input(type='text', name='USR', value='')
+          | Spotify Password: 
+          input(type='text', name='PASS', value='')
+        p 
+          | 
+
+        input#html(type='radio' name='fav_language' value='HTML')
+        label(for='html') HTML
+        br
+        input#css(type='radio' name='fav_language' value='CSS')
+        label(for='css') CSS
+        br
+        input#javascript(type='radio' name='fav_language' value='JavaScript')
+        label(for='javascript') JavaScript
+        br
+        input(type='submit', value='Submit')
